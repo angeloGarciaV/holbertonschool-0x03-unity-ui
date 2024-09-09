@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public int health = 5;
     public Text scoreText;
     public Text healthText;
+    public GameObject winLoseUI;
+    public Text winLoseText;
 
     private bool isMoving;
     private float originalSpeed;
@@ -48,13 +51,15 @@ public class PlayerController : MonoBehaviour
         {
             speed = originalSpeed;
         }
-        
         isMoving = false;
 
         if (health == 0)
         {
-            Debug.Log("Game Over!");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            winLoseUI.GetComponent<Image>().color = Color.red; 
+            winLoseText.text = "Game Over!";
+            winLoseUI.SetActive(true);
+            StartCoroutine(LoadScene(3));
+            
         }
     }
     void OnTriggerEnter(Collider other)
@@ -74,7 +79,10 @@ public class PlayerController : MonoBehaviour
         
         if (other.CompareTag("Goal"))
         {
-            Debug.Log("You win!");
+            winLoseUI.GetComponent<Image>().color = Color.green; 
+            winLoseText.color = Color.black;
+            winLoseText.text = "You Win!";
+            winLoseUI.SetActive(true);
         }
     }
     void SetScoreText()
@@ -85,5 +93,10 @@ public class PlayerController : MonoBehaviour
     void SetHealthText()
     {
         healthText.text = $"Health: {health}";
+    }
+    IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
