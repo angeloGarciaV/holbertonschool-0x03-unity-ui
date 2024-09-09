@@ -51,6 +51,10 @@ public class PlayerController : MonoBehaviour
         {
             speed = originalSpeed;
         }
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("menu");
+        }
         isMoving = false;
 
         if (health == 0)
@@ -59,7 +63,6 @@ public class PlayerController : MonoBehaviour
             winLoseText.text = "Game Over!";
             winLoseUI.SetActive(true);
             StartCoroutine(LoadScene(3));
-            
         }
     }
     void OnTriggerEnter(Collider other)
