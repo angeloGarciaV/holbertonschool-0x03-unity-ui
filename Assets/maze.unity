@@ -4470,7 +4470,7 @@ MonoBehaviour:
   rb: {fileID: 938937894}
   speed: 1000
   boost: 3000
-  health: 1
+  health: 5
   scoreText: {fileID: 146727818}
   healthText: {fileID: 2095165389}
   winLoseUI: {fileID: 661287015}
