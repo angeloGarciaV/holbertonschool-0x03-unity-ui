@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
             winLoseText.color = Color.black;
             winLoseText.text = "You Win!";
             winLoseUI.SetActive(true);
+            StartCoroutine(LoadScene(3));
         }
     }
     void SetScoreText()
